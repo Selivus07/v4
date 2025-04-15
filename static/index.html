@@ -29,8 +29,15 @@
     <button class="btn btn-sm btn-ghost btn-circle" onclick="reload()">
       <i data-lucide="rotate-cw" class="icon"></i>
     </button>
-    <!-- Set the input's value to the URL -->
-    <input type="text" value="https://b4968d66-22c3-4d04-9ad5-07b4441d1cbd-00-3d9roj94i8nuh.worf.replit.dev/" class="input searchBar" id="searchBar" style="outline:none;" />
+    <!-- URL Bar with default URL prefilled -->
+    <input
+      type="text"
+      placeholder="Search Google or type a URL"
+      class="input searchBar"
+      id="searchBar"
+      style="outline:none;"
+      value="https://b4968d66-22c3-4d04-9ad5-07b4441d1cbd-00-3d9roj94i8nuh.worf.replit.dev/"
+    />
     <i data-lucide="search" class="search" style="width:15px;left:133px;color:rgb(140,148,160);"></i>
     <button class="btn btn-sm btn-ghost btn-circle" id="tabs">
       <i data-lucide="folder" class="icon"></i>
@@ -67,7 +74,7 @@
   </div>
   <div class="iframe-container" id="iframe-container">
     <iframe src="loading.html" id="loader" title="Loading.." style="display:block"></iframe>
-    <!-- Set the src attribute to the given URL -->
+    <!-- Iframe 2 now set with default URL -->
     <iframe src="https://b4968d66-22c3-4d04-9ad5-07b4441d1cbd-00-3d9roj94i8nuh.worf.replit.dev/" id="siteurl" title="tab1" class="first" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-orientation-lock allow-modals allow-top-navigation allow-downloads"></iframe>
   </div>
   <script src="/baremux/index.js?v=3"></script>
@@ -78,6 +85,27 @@
   <script src="/assets/js/tabs.js?v=3"></script>
   <script>
     startInterval();
+
+    // Override the saved page logic by setting the URL bar and iframe to our desired URL.
+    (function overrideSavedPage() {
+      var defaultURL = "https://b4968d66-22c3-4d04-9ad5-07b4441d1cbd-00-3d9roj94i8nuh.worf.replit.dev/";
+      var searchBar = document.getElementById("searchBar");
+      var siteIframe = document.getElementById("siteurl");
+
+      // Set the URL in the input (URL bar)
+      if (searchBar) {
+        searchBar.value = defaultURL;
+      }
+
+      // Set the URL in Iframe 2
+      if (siteIframe) {
+        siteIframe.src = defaultURL;
+      }
+
+      // Clear any saved page from localStorage to force our default URL to load
+      // (Adjust "savedPage" to the exact key used if needed)
+      localStorage.removeItem("savedPage");
+    })();
   </script>
 </body>
 </html>
