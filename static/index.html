@@ -83,29 +83,27 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="/assets/js/loader.js?v=3"></script>
   <script src="/assets/js/tabs.js?v=3"></script>
-  <script>
-    startInterval();
-
-    // Override the saved page logic by setting the URL bar and iframe to our desired URL.
-    (function overrideSavedPage() {
-      var defaultURL = "https://b4968d66-22c3-4d04-9ad5-07b4441d1cbd-00-3d9roj94i8nuh.worf.replit.dev/";
-      var searchBar = document.getElementById("searchBar");
-      var siteIframe = document.getElementById("siteurl");
-
-      // Set the URL in the input (URL bar)
-      if (searchBar) {
-        searchBar.value = defaultURL;
-      }
-
-      // Set the URL in Iframe 2
-      if (siteIframe) {
-        siteIframe.src = defaultURL;
-      }
-
-      // Clear any saved page from localStorage to force our default URL to load
-      // (Adjust "savedPage" to the exact key used if needed)
-      localStorage.removeItem("savedPage");
-    })();
-  </script>
+<script>
+  // Wait for the page to finish loading
+  window.addEventListener("load", function() {
+    // Get the search bar element by its ID
+    var searchBar = document.getElementById("searchBar");
+    
+    // Set the URL you want to pre-fill
+    searchBar.value = "https://b4968d66-22c3-4d04-9ad5-07b4441d1cbd-00-3d9roj94i8nuh.worf.replit.dev/";
+    
+    // Create a new KeyboardEvent to simulate pressing Enter
+    var enterEvent = new KeyboardEvent('keydown', {
+      key: "Enter",
+      code: "Enter",
+      keyCode: 13,   // legacy code for Enter; most modern scripts use "key" and "code"
+      which: 13,
+      bubbles: true
+    });
+    
+    // Dispatch the event on the search bar
+    searchBar.dispatchEvent(enterEvent);
+  });
+</script>
 </body>
 </html>
